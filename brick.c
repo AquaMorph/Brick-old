@@ -36,6 +36,10 @@ int main(int argc, char **argv) {
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), fileMi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), editMi);
     gtk_box_pack_start(GTK_BOX(vbox), menubar, FALSE, FALSE, 0);
+
+    // Closes program when quit is selected
+    g_signal_connect(G_OBJECT(quitMi), "activate",
+		     G_CALLBACK(gtk_main_quit), NULL);
     
     gtk_widget_show_all(window);
     gtk_main();
