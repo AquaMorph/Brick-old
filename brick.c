@@ -6,10 +6,16 @@ void menubar(GtkWidget *vbox) {
   // Menubar
     GtkWidget *menubar;
     GtkWidget *fileMenu;
+    GtkWidget *newMenu;
     GtkWidget *openMenu;
     GtkWidget *editMenu;
     GtkWidget *sep;
+    GtkWidget *sep2;
     GtkWidget *fileMi;
+    GtkWidget *newMi;
+    GtkWidget *newProjectMi;
+    GtkWidget *newSceneMi;
+    GtkWidget *newTakeMi;
     GtkWidget *openMi;
     GtkWidget *openProjectMi;
     GtkWidget *openSceneMi;
@@ -18,10 +24,22 @@ void menubar(GtkWidget *vbox) {
     GtkWidget *quitMi;
 
     menubar = gtk_menu_bar_new();
+    sep = gtk_separator_menu_item_new();
 
     // File Menu
     fileMenu = gtk_menu_new();
     fileMi = gtk_menu_item_new_with_label("File");
+        newMenu = gtk_menu_new();
+	newMi = gtk_menu_item_new_with_label("New");
+	    newProjectMi = gtk_menu_item_new_with_label("New Project");
+	    newSceneMi = gtk_menu_item_new_with_label("New Scene");
+	    newTakeMi = gtk_menu_item_new_with_label("New Take");
+	    gtk_menu_item_set_submenu(GTK_MENU_ITEM(newMi), newMenu);
+	    gtk_menu_shell_append(GTK_MENU_SHELL(newMenu), newProjectMi);
+	    gtk_menu_shell_append(GTK_MENU_SHELL(newMenu), newSceneMi);
+	    gtk_menu_shell_append(GTK_MENU_SHELL(newMenu), newTakeMi);
+	    gtk_menu_shell_append(GTK_MENU_SHELL(fileMenu), newMi);
+	    gtk_menu_shell_append(GTK_MENU_SHELL(fileMenu), sep);
         openMenu = gtk_menu_new();
 	openMi = gtk_menu_item_new_with_label("Open");
 	    openProjectMi = gtk_menu_item_new_with_label("Open Project");
@@ -31,7 +49,6 @@ void menubar(GtkWidget *vbox) {
 	    gtk_menu_shell_append(GTK_MENU_SHELL(openMenu), openProjectMi);
 	    gtk_menu_shell_append(GTK_MENU_SHELL(openMenu), openSceneMi);
 	    gtk_menu_shell_append(GTK_MENU_SHELL(openMenu), openTakeMi);
-	    sep = gtk_separator_menu_item_new();
 	    gtk_menu_shell_append(GTK_MENU_SHELL(fileMenu), openMi);
 	    gtk_menu_shell_append(GTK_MENU_SHELL(fileMenu), sep);
     quitMi = gtk_menu_item_new_with_label("Quit");
